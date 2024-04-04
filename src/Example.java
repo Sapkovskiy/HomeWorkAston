@@ -7,20 +7,23 @@ public class Example {
             a.add(i); // добавили числа
         }
         a.add("end");
-//        for (int i = 0; i < a.length(); i++) {
-//            System.out.println(a.get(i)); // выводим все элементы
-//        }
-        System.out.println("Длинна массива = "+a.length()); // проверка длинны
 
-        a.remove(5); //удаляем элемент под индексом 5
+        System.out.println("Длинна коллекции после расширения= "+a.length()); // проверка длинны
+
+        a.remove(1); //удаляем элемент под индексом 5
 
         for (int i = 0; i < a.length(); i++) {
-            System.out.println(a.get(i)); // выводим все элементы после удаления
+            System.out.print(a.get(i)+" "); // выводим все элементы после удаления одного
         }
-        for (int i = 2; i < a.length()-2; i++) {
+        System.out.println();
+        for (int i = 1; a.get(i)!=null; ) { // удаляем все элементы кроме первого
             a.remove(i);
         }
-        System.out.println("Длинна массива = "+a.length());
+        for (int i = 0; i < a.length(); i++) {
+            System.out.print(a.get(i)+ " "); // выводим оставшийся элемент
+        }
+        System.out.println("\n"+"Длинна коллекции = "+a.length()); // минимальная длинна массива
+        System.out.println("Количество заполненных ячеек = "+a.size());
     }
 
 }
