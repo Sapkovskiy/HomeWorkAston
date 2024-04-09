@@ -53,5 +53,14 @@ public class Example {
         for (int i = 0; i < a3.length(); i++) {
             System.out.print(a3.get(i)+" "); // выводим все элементы после сортировки
         }
+
+
+        ArrayList<Integer> a4 = new ArrayList<>();
+        a4.add(999);
+        a4.add(842);
+        a4.add(14);
+        a4.add(43);
+        MyArrayList<Integer> a5 =new MyArrayList<>(a4);
+        System.out.println("\n Получаем число под индексом 2 = "+a5.get(2));
     }
 }
