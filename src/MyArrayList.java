@@ -1,6 +1,6 @@
 
-import java.util.ArrayList;
-import java.util.Arrays;
+
+
 import java.util.Collection;
 
 /**Необходимо написать свою реализацию коллекции ArrayList. Должны быть основные методы add,
@@ -76,7 +76,7 @@ public class MyArrayList <T> { //создаем класс под неизвес
     }
     /**Изменение размера коллекции
      */
-    public void newSize(int newSize){ // меняем размер массива
+    private void newSize(int newSize){ // меняем размер массива
         Object[] newArray = new Object[newSize];
 //         for (int i = 0; i <= index ; i++) { //первый вариант поверхностного копирования массива
 //            newArray[i] = array[i];
@@ -147,29 +147,51 @@ public class MyArrayList <T> { //создаем класс под неизвес
         }
         return true;
     }
-    /**Реализация сортировки пузырьком для int значений
+    /**Реализация сортировки пузырьком для простых чисел
      */
     public void bubbleSortInteger() {
-        try {
-            boolean flag = true;
-            while (flag) {
-                flag = false;
-                for (int i = index - 1; i >= 1; i--) {
-                    for (int j = 0; j < i; j++) {
-                        if ((int) array[j] > (int) array[j + 1]) {
-                            toSwap(j, j + 1);
-                            flag = true;
+        String type = array[0].getClass().getSimpleName();
+        System.out.println(type);
+            try {
+                boolean flag = true;
+                while (flag) {
+                    flag = false;
+                    for (int i = index - 1; i >= 1; i--) {
+                        for (int j = 0; j < i; j++) {
+                            switch (type){
+                                case "Integer":{
+                                    if ((int)array[j] > (int)array[j + 1]) {
+                                        toSwap(j, j + 1);
+                                     flag = true;
+                                    }
+                                    break;
+                                }
+                                case "Double" :{
+                                    if ((double)array[j] > (double) array[j + 1]) {
+                                        toSwap(j, j + 1);
+                                        flag = true;
+                                    }
+                                    break;
+                                }
+                                case "Float" :{
+                                    if ((float)array[j] > (float) array[j + 1]) {
+                                        toSwap(j, j + 1);
+                                        flag = true;
+                                    }
+                                    break;
+                                }
+                            }
                         }
-                    }
 
+                    }
                 }
+            } catch (Exception e) {
+                System.out.println("Коллекция не из простых чисел");
             }
-        }catch (Exception e){
-            System.out.println("Коллекция не из целых чисел");
-        }
+
     }
     private void toSwap(int first,int second){
-        int temp = (int)array[first];
+        Object temp = array[first];
         array[first]=array[second];
         array[second]=temp;
     }
