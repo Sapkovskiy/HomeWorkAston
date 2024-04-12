@@ -1,7 +1,10 @@
 
 
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.Comparator;
+import java.util.ConcurrentModificationException;
 
 /**Необходимо написать свою реализацию коллекции ArrayList. Должны быть основные методы add,
  * get, remove, addAll(ДругаяКоллекция параметр), остальное на ваше усмотрение
@@ -14,18 +17,17 @@ import java.util.Collection;
    (Аналогия Collections.sort()). Т.е подумать на тему какое ключевое слово(extends или super)
    будет лучше применить для этих двух задач.
  */
-public class MyArrayList <T> { //создаем класс под неизвестный тип
+public class MyArrayList <T> implements MyList<T>{ //создаем класс под неизвестный тип
     private Object[] array = new Object[INITIAL_SIZE]; // создаем массив
     private static final int INITIAL_SIZE = 10; // задаем начальный размер массива
     public int index = 0; // задаем начальное количество вещественных элементов массива
-
     private static final Object[] EMPTY = {};
-    public Object[] elementData;
+    public static Object[] elementData;
     private static final int DECREASE = 2; // порог уменьшения массива
     private static final int INCREASE =2; // во сколько раз изменить размер массива при заполнении или уменьшении
 
     public MyArrayList() {
-        this.elementData = EMPTY;
+        array = EMPTY;
     }
 
     /**Для этой коллекции сделать конструктор который
@@ -195,4 +197,21 @@ public class MyArrayList <T> { //создаем класс под неизвес
         array[first]=array[second];
         array[second]=temp;
     }
+
+    @Override
+    public Object[] toArray() {
+        return Arrays.copyOf(array, index);
+    }
+
+    @Override
+    public Object[] toArray(Object[] a) {
+        if (a.length < index)
+            // Make a new array of a's runtime type, but my contents:
+            return (T[]) Arrays.copyOf(array, index, a.getClass());
+        System.arraycopy(array, 0, a, 0, index);
+        if (a.length > index)
+            a[index] = null;
+        return a;
+    }
+
 }
